@@ -1,3 +1,4 @@
+//works only for sorted data
 function binarySearch(arr, target) {
     let rightIndex = arr.length-1;
     let leftIndex = 0;

@@ -107,31 +107,81 @@ class LinkedList {
   }
 
   search(value) {
-    if(this.isEmpty()) {
-        return -1
+    if (this.isEmpty()) {
+      return -1;
     }
 
     let i = 0;
     let current = this.head;
-    while(current) {
-        if(current.value === value){
-            return i
-        }
-        current = current.next;
-        i++
+    while (current) {
+      if (current.value === value) {
+        return i;
+      }
+      current = current.next;
+      i++;
     }
 
-    return -1
+    return -1;
   }
 
-  reverse(){
+  sort() {
+    if (this.isEmpty()) {
+      return "empty list";
+    }
+    if (this.size === 1) {
+      return this.head;
+    }
+
+    let current = this.head;
+    let listValues = [];
+    while (current) {
+      listValues.push(current.value);
+      current = current.next;
+    }
+    
+   function quickSort(arr) {
+     let n = arr.length;
+     if (n <= 1) {
+       return arr;
+     }
+
+     const pivot = arr[n - 1];
+     const left = [],
+       right = [];
+
+     for (let i = 0; i < n - 1; i++) {
+       if (arr[i] < pivot) {
+         left.push(arr[i]);
+       } else {
+         right.push(arr[i]);
+       }
+     }
+
+     const sortedLeft = quickSort(left);
+     const sortedRight = quickSort(right);
+     return [...sortedLeft, pivot, ...sortedRight];
+   }
+
+   const sortedList = quickSort(listValues);
+   this.head = new Node(sortedList[0]);
+   current = this.head;
+
+   for(let i = 1; i < sortedList.length; i++) {
+    current.next = new Node(sortedList[i]);
+    current = current.next
+   }
+
+   return this;
+  }
+
+  reverse() {
     let prev = null;
     let current = this.head;
-    while(current) {
-        let next = current.next;
-        current.next = prev;
-        prev = current;
-        current = next;
+    while (current) {
+      let next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
     }
     this.head = prev;
   }
@@ -152,19 +202,48 @@ class LinkedList {
 }
 
 const list = new LinkedList();
-console.log(list.isEmpty());
-console.log(list.getSize());
-list.print();
-list.append(10);
-list.print();
+// console.log(list.isEmpty());
+// console.log(list.getSize());
+// list.print();
+// list.append(10);
+// list.print();
 
-list.append(20);
-list.prepend(30);
-list.print();
-list.insert(5, 1);
-list.print();
-console.log(list.removeValue(30));
-list.print();
-console.log(list.search(2))
-list.reverse();
-list.print();
+// list.append(2);
+// list.append(1);
+// list.prepend(30);
+// list.print();
+// list.insert(5, 1);
+// list.print();
+// console.log(list.removeValue(30));
+// list.print();
+// console.log(list.search(2))
+// list.reverse();
+// list.print();
+// console.log(list.sort().print())
+
+list.append(8);
+list.append(4);
+list.append(6);
+list.print()
+list.sort()
+list.print()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
