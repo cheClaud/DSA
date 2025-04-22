@@ -30,6 +30,8 @@ class LinkedListQueue {
   }
 }
 
+module.exports = LinkedListQueue;
+
 const queue = new LinkedListQueue();
 console.log(queue.isEmpty());
 queue.enqueue(10);
